@@ -28,6 +28,25 @@ function plugin() {
 }
 
 /**
+ * Helper class instance
+ *
+ * Theme helper class is changed tp
+ * HTML in Bludit version 4.0.
+ *
+ * @since  1.0.0
+ * @return object
+ */
+function helper() {
+
+	if ( defined( 'BLUDIT_VERSION' ) && BLUDIT_VERSION >= 4 ) {
+		$helper_class = new \HTML;
+	} else {
+		$helper_class = new \Theme;
+	}
+	return $helper_class;
+}
+
+/**
  * Site class object
  *
  * Function to use inside other functions and
@@ -1241,6 +1260,29 @@ function title_tag() {
 }
 
 /**
+ * Social links
+ *
+ * Gets the social network URLs from
+ * the site settings.
+ *
+ * @since  1.0.0
+ * @return mixed Returns an array of URLs or false.
+ */
+function social_links() {
+
+	$social = helper() :: socialNetworks();
+	$links  = [];
+
+	if ( ! $social ) {
+		return false;
+	}
+	foreach ( $social as $link ) {
+		$links[] = site()->{$link}();
+	}
+	return $links;
+}
+
+/**
  * Get keywords
  *
  * Converts each line of the textarea field
@@ -1721,6 +1763,16 @@ function meta_tags_open_graph() {
 			'<meta property="og:image" content="%s" />',
 			get_cover_src()
 		) . "\r";
+	}
+
+	// Social tags.
+	if ( social_links() ) {
+		foreach ( social_links() as $url ) {
+			$html .= sprintf(
+				'<meta property="og:see_also" content="%s" />',
+				$url
+			) . "\r";
+		}
 	}
 	return $html;
 }
