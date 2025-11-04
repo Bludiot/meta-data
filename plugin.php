@@ -124,6 +124,7 @@ class Meta_Data extends Plugin {
 
 		// Array of custom hooks.
 		$this->customHooks = [
+			'title_tag',
 			'all_meta_tags',
 			'standard_tags',
 			'schema_tags',
