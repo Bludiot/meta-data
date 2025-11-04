@@ -61,12 +61,20 @@ code.select {
 
 	<div id="meta-tags" class="tab-pane fade show active" role="tabpanel" aria-labelledby="meta-tags-tab">
 
-		<h3 class="form-heading"><?php lang()->p( 'Meta Tag Options' ); ?></h3>
-
-		<p><?php lang()->p( 'Select which types of meta tags are enabled.' ); ?></p>
+		<h3 class="form-heading"><?php lang()->p( 'Meta Tags' ); ?></h3>
 
 		<fieldset>
 			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?>	</legend>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="loop_desc"><?php lang()->p( 'Blog Description' ); ?></label>
+				<div class="col-sm-10">
+					<div class="field-has-buttons">
+						<input type="text" id="loop_desc" name="loop_desc" value="<?php echo plugin()->getValue( 'loop_desc' ); ?>" placeholder="<?php echo plugin()->loop_desc(); ?>" />
+					</div>
+					<small class="form-text"><?php lang()->p( 'Description for blog pages when a static page is not used for the blog index.' ); ?></small>
+				</div>
+			</div>
 
 			<div class="form-field form-group row">
 				<label class="form-label col-sm-2 col-form-label" for="meta_noindex"><?php lang()->p( 'No Index' ); ?></label>

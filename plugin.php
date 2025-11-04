@@ -92,6 +92,7 @@ class Meta_Data extends Plugin {
 		$this->dbFields = [
 			'title_sep'        => '|',
 			'custom_sep'       => '',
+			'loop_desc'        => '',
 			'default_ttag'     => '',
 			'loop_ttag'        => '',
 			'post_ttag'        => '',
@@ -426,6 +427,18 @@ class Meta_Data extends Plugin {
 	// @return string
 	public function custom_sep() {
 		return $this->getValue( 'custom_sep' );
+	}
+
+	// @return string
+	public function loop_desc() {
+
+		$default = lang()->get( 'Post index for' ) . ' ' . site()->title();
+		$setting = $this->getValue( 'loop_desc' );
+
+		if ( ! empty( $setting ) && ! ctype_space( $setting ) ) {
+			return strip_tags( $this->getValue( 'loop_desc' ) );
+		}
+		return $default;
 	}
 
 	// @return string

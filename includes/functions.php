@@ -375,6 +375,27 @@ function static_loop_page() {
 }
 
 /**
+ * Main loop description
+ *
+ * @since  1.0.0
+ * @return string
+ */
+function loop_description() {
+
+	$text   = plugin()->loop_desc();
+	$static = static_loop_page();
+	if ( $static ) {
+		if (
+			! empty( $static->description() ) &&
+			! ctype_space( $static->description() )
+		) {
+			$text = $static->description();
+		}
+	}
+	return $text;
+}
+
+/**
  * Is page
  *
  * If on a page, static or not.
@@ -570,7 +591,7 @@ function has_cover( $default = '' ) {
 	}
 
 	// If on a singular post or page.
-	if ( is_main_loop() ) {
+	if ( is_main_loop() /* && ! loop_cover() */ ) {
 		$cover = false;
 	} elseif ( is_user() ) {
 		if ( configureight() ) {
@@ -1219,7 +1240,7 @@ function meta_description() {
 		$desc = page_description( page()->key() );
 
 	} elseif ( is_home() || is_main_loop() ) {
-		$desc = '';
+		$desc = loop_description();
 
 	} elseif ( is_cat() ) {
 		$cat  = new \Category( url()->slug() );
