@@ -425,226 +425,6 @@ function is_404() {
 }
 
 /**
- * Loop data
- *
- * Gets data for the loop, especially when
- * using a static front page.
- *
- * @since  1.0.0
- * @global array  $content array of site content
- * @global object $pages Pages class
- * @return array  Returns an array of loop data.
- */
-function loop_data() {
-
-	// Access global variables.
-	global $content, $pages;
-
-	// Null if in search results (global errors).
-	if ( is_search() ) {
-		return null;
-	}
-
-	// Posts loop type.
-	$loop_type = 'blog';
-	if ( configureight() ) {
-		$loop_type = configureight()->loop_type();
-	}
-
-	// Default loop description.
-	$description = site()->title();
-	if ( configureight() ) {
-		if ( ! empty( configureight()->loop_description() ) ) {
-			$description = configureight()->loop_description();
-		}
-	}
-
-	// Default data array.
-	$data = [
-		'post_count'  => $pages->count(),
-		'show_posts'  => site()->getField( 'itemsPerPage' ),
-		'location'    => 'home',
-		'key'         => false,
-		'url'         => loop_url(),
-		'slug'        => str_replace( '/', '', site()->getField( 'uriBlog' ) ),
-		'template'    => false,
-		'type'        => $loop_type,
-		'title'       => $loop_type,
-		'description' => $description,
-		'cover'       => false,
-	];
-
-	if ( ! is_static_loop() ) {
-		return $data;
-	} else {
-
-		// Get data from the static loop page.
-		$loop_page = static_loop_page();
-
-		// Description from the static loop page.
-		if ( ! empty( $loop_page->description() ) ) {
-			$description = $loop_page->description();
-		}
-
-		$static_data = [
-			'location'    => 'page',
-			'key'         => $loop_page->key(),
-			'slug'        => $loop_page->slug(),
-			'template'    => $loop_page->template(),
-			'title'       => $loop_page->title(),
-			'description' => $description,
-			'cover'       => $loop_page->coverImage()
-		];
-		$data = array_merge( $data, $static_data );
-	}
-	return $data;
-}
-
-/**
- * Loop post count
- *
- * Gets loop post count from the loop data.
- *
- * @since  1.0.0
- * @return integer Returns the loop post count.
- */
-function loop_post_count() {
-	$loop_data = loop_data();
-	return $loop_data['post_count'];
-}
-
-/**
- * Loop show posts
- *
- * Gets loop posts per page from the loop data.
- *
- * @since  1.0.0
- * @return integer Returns the loop posts per page.
- */
-function loop_show_posts() {
-	$loop_data = loop_data();
-	return $loop_data['show_posts'];
-}
-
-/**
- * Loop location
- *
- * Gets loop location from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop location.
- */
-function loop_location() {
-	$loop_data = loop_data();
-	return $loop_data['location'];
-}
-
-/**
- * Loop key
- *
- * Gets loop key from the loop data.
- *
- * @since  1.0.0
- * @return mixed Returns the loop key or false.
- */
-function loop_key() {
-	$loop_data = loop_data();
-	return $loop_data['key'];
-}
-
-/**
- * Loop URL
- *
- * Gets loop URL from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop URL.
- */
-function loop_url() {
-	$loop_data = loop_data();
-	return $loop_data['url'];
-}
-
-/**
- * Loop slug
- *
- * Gets loop slug from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop slug.
- */
-function loop_slug() {
-	$loop_data = loop_data();
-	return $loop_data['slug'];
-}
-
-/**
- * Loop template
- *
- * Gets loop template from the loop data.
- *
- * @since  1.0.0
- * @return mixed Returns the loop template or false.
- */
-function loop_template() {
-	$loop_data = loop_data();
-	return $loop_data['template'];
-}
-
-/**
- * Loop type
- *
- * Gets loop type from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop type.
- */
-function loop_type() {
-	$loop_data = loop_data();
-	return $loop_data['type'];
-}
-
-/**
- * Loop title
- *
- * Gets loop title from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop title.
- */
-function loop_title() {
-	$loop_data = loop_data();
-	return $loop_data['title'];
-}
-
-/**
- * Loop description
- *
- * Gets loop description from the loop data.
- *
- * @since  1.0.0
- * @return string Returns the loop description.
- */
-function loop_description() {
-	$loop_data = loop_data();
-
-	return $loop_data['description'];
-}
-
-/**
- * Loop cover image
- *
- * Gets loop cover image from the loop data.
- *
- * @since  1.0.0
- * @return mixed Returns the loop cover image or false.
- */
-function loop_cover() {
-	$loop_data = loop_data();
-	return $loop_data['cover'];
-}
-
-/**
  * Page type
  *
  * Whether the page object is static or not.
@@ -748,28 +528,7 @@ function get_cover_src() {
 
 	// If in loop pages.
 	if ( is_main_loop() ) {
-		if ( is_static_loop() ) {
-			$loop  = loop_data();
-			$build = buildPage( $loop['slug'] );
-			$uuid   = $build->uuid();
-			$dir    = PATH_UPLOADS_PAGES . $uuid . DS;
-			$files  = \Filesystem :: listFiles( $dir, '*', '*', true, 0 );
-			$images = [];
-
-			// Get the URL for each full-size image.
-			foreach ( $files as $file ) {
-				$images[] = DOMAIN_UPLOADS_PAGES . $uuid . '/' . str_replace( $dir, '', $file );
-			}
-
-			if ( $build->custom( 'random_cover' ) ) {
-				$rand = array_rand( $images );
-				$src  = $images[$rand];
-			} elseif ( ! empty( $loop['cover'] ) ) {
-				$src = $loop['cover'];
-			} else {
-				$src = $default;
-			}
-		} elseif ( $default ) {
+		if ( $default ) {
 			$src = $default;
 		} elseif ( page()->coverImage() ) {
 			$src = page()->coverImage();
@@ -811,7 +570,7 @@ function has_cover( $default = '' ) {
 	}
 
 	// If on a singular post or page.
-	if ( is_main_loop() && ! loop_cover() ) {
+	if ( is_main_loop() ) {
 		$cover = false;
 	} elseif ( is_user() ) {
 		if ( configureight() ) {
@@ -1460,7 +1219,7 @@ function meta_description() {
 		$desc = page_description( page()->key() );
 
 	} elseif ( is_home() || is_main_loop() ) {
-		$desc = loop_description();
+		$desc = '';
 
 	} elseif ( is_cat() ) {
 		$cat  = new \Category( url()->slug() );
