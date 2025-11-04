@@ -153,15 +153,9 @@ class Meta_Data extends Plugin {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @global object $L Language class.
-	 * @global object $plugin Plugin class.
-	 * @global object $site Site class.
 	 * @return string Returns the markup of the form.
 	 */
 	public function form() {
-
-		// Access global variables.
-		global $L, $plugin, $site;
 
 		$html  = '';
 		ob_start();
@@ -495,11 +489,36 @@ class Meta_Data extends Plugin {
 	// @return string
 	public function loop_title() {
 
-		$default = site()->title() . ' ' . lang()->get( 'Blog' );
-		$setting = $this->getValue( 'loop_title' );
+		$default   = site()->title() . ' ' . lang()->get( 'Blog' );
+		$setting   = $this->getValue( 'loop_title' );
+		$separator = $this->getValue( 'title_sep' );
+		$loop_page = '';
+
+		if ( isset( $_GET['page'] ) && $_GET['page'] > 1 ) {
+			$loop_page = sprintf(
+				'%s %s',
+				lang()->get( 'Page' ),
+				$_GET['page']
+			);
+			if ( is_rtl() ) {
+				$loop_page = sprintf(
+					'%s %s %s',
+					$_GET['page'],
+					lang()->get( 'Page' )
+				);
+			}
+		}
 
 		if ( ! empty( $setting ) && ! ctype_space( $setting ) ) {
-			return strip_tags( $this->getValue( 'loop_title' ) );
+
+			$setting = strip_tags( $setting );
+			$setting = str_replace( '{{separator}}', $separator, $setting );
+			$setting = str_replace( '{{site-title}}', site()->title(), $setting );
+			$setting = str_replace( '{{site-slogan}}', site()->slogan(), $setting );
+			$setting = str_replace( '{{site-description}}', site()->description(), $setting );
+			$setting = str_replace( '{{page-number}}', $loop_page, $setting );
+
+			return $setting;
 		}
 		return $default;
 	}

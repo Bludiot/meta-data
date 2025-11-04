@@ -74,9 +74,17 @@ code.select {
 				<label class="form-label col-sm-2 col-form-label" for="loop_title"><?php lang()->p( 'Blog Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
-						<input type="text" id="loop_title" name="loop_title" value="<?php echo plugin()->getValue( 'loop_title' ); ?>" placeholder="<?php echo plugin()->loop_title(); ?>" />
+						<input type="text" id="loop_title" name="loop_title" value="<?php echo plugin()->getValue( 'loop_title' ); ?>" placeholder="" />
 					</div>
-					<small class="form-text"><?php lang()->p( 'Title for blog pages when a static page is not used for the blog index.' ); ?></small>
+					<small class="form-text"><?php lang()->p( 'Title for blog pages when a static page is not used for the blog index. A combination of text and placeholders may be used for a dynamic title.' ); ?></small>
+					<small class="form-text">
+						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
+						<code class="select">{{separator}}</code>
+						<code class="select">{{site-title}}</code>
+						<code class="select">{{site-slogan}}</code>
+						<code class="select">{{site-description}}</code>
+						<code class="select">{{page-number}}</code>
+					</small>
 				</div>
 			</div>
 
@@ -257,7 +265,7 @@ code.select {
 				<label class="form-label col-sm-2 col-form-label" for="loop_ttag"><?php lang()->p( 'LTR Loop Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
-						<input type="text" id="loop_ttag" name="loop_ttag" value="<?php echo plugin()->getValue( 'loop_ttag' ); ?>" placeholder="{{loop-type}} {{page-number}} {{separator}} {{site-title}}" />
+						<input type="text" id="loop_ttag" name="loop_ttag" value="<?php echo plugin()->getValue( 'loop_ttag' ); ?>" placeholder="<?php echo lang()->get( 'Blog' ); ?> {{page-number}} {{separator}} {{site-title}}" />
 						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#loop_ttag').val('');"><?php lang()->p( 'Clear' ); ?></span>
 					</div>
 					<small class="form-text">
@@ -266,7 +274,6 @@ code.select {
 						<code class="select">{{site-title}}</code>
 						<code class="select">{{site-slogan}}</code>
 						<code class="select">{{site-description}}</code>
-						<code class="select">{{loop-type}}</code>
 						<code class="select">{{page-number}}</code>
 					</small>
 				</div>
@@ -414,7 +421,7 @@ code.select {
 				<label class="form-label col-sm-2 col-form-label" for="loop_ttag_rtl"><?php lang()->p( 'RTL Loop Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
-						<input type="text" id="loop_ttag_rtl" name="loop_ttag_rtl" value="<?php echo plugin()->getValue( 'loop_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{page-number}} {{loop-type}}" />
+						<input type="text" id="loop_ttag_rtl" name="loop_ttag_rtl" value="<?php echo plugin()->getValue( 'loop_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{page-number}} <?php echo lang()->get( 'Blog' ); ?>" />
 						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#loop_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
 					</div>
 					<small class="form-text">
@@ -423,7 +430,6 @@ code.select {
 						<code class="select">{{site-title}}</code>
 						<code class="select">{{site-slogan}}</code>
 						<code class="select">{{site-description}}</code>
-						<code class="select">{{loop-type}}</code>
 						<code class="select">{{page-number}}</code>
 					</small>
 				</div>

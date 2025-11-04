@@ -1238,12 +1238,7 @@ function meta_title() {
 				site()->title()
 			);
 		} elseif ( plugin()->loop_title() ) {
-			$title = sprintf(
-				'%s %s %s',
-				plugin()->loop_title(),
-				$separator,
-				site()->title()
-			);
+			$title = plugin()->loop_title();
 		} else {
 			$title = sprintf(
 				'%s %s %s',
