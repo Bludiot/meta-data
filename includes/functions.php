@@ -1028,7 +1028,6 @@ function title_tag() {
 	$format = str_replace( '{{site-title}}', $site->title(), $format );
 	$format = str_replace( '{{site-slogan}}', $site->slogan(), $format );
 	$format = str_replace( '{{site-description}}', $site->description(), $format );
-	$format = str_replace( '{{loop-type}}', ucwords( configureight()->loop_type() ), $format );
 	$format = str_replace( '{{page-number}}', $loop_page, $format );
 
 	$title = sprintf(
