@@ -305,7 +305,16 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function all_meta_tags() {}
+	public function all_meta_tags() {
+
+		$meta  = meta_tags_standard();
+		$meta .= meta_tags_schema();
+		$meta .= meta_tags_open_graph();
+		$meta .= meta_tags_twitter();
+		$meta .= meta_tags_dublin_core();
+
+		return $meta;
+	}
 
 	/**
 	 * Standard tags hook
@@ -314,7 +323,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function standard_tags() {}
+	public function standard_tags() {
+		return meta_tags_standard();
+	}
 
 	/**
 	 * Schema tags hook
@@ -323,7 +334,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function schema_tags() {}
+	public function schema_tags() {
+		return meta_tags_schema();
+	}
 
 	/**
 	 * Open Graph tags hook
@@ -332,7 +345,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function open_graph_tags() {}
+	public function open_graph_tags() {
+		return meta_tags_open_graph();
+	}
 
 	/**
 	 * Twitter tags hook
@@ -341,7 +356,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function twitter_tags() {}
+	public function twitter_tags() {
+		return meta_tags_twitter();
+	}
 
 	/**
 	 * Dublin Core tags hook
@@ -350,7 +367,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function dublin_core_tags() {}
+	public function dublin_core_tags() {
+		return meta_tags_dublin_core();
+	}
 
 	/**
 	 * Language meta tag hook
@@ -359,7 +378,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_language() {}
+	public function meta_tag_language() {
+		return meta_tag_language( false );
+	}
 
 	/**
 	 * Keywords meta tag hook
@@ -368,7 +389,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_keywords() {}
+	public function meta_tag_keywords() {
+		return meta_tag_keywords( false );
+	}
 
 	/**
 	 * Title meta tag hook
@@ -377,7 +400,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_title() {}
+	public function meta_tag_title() {
+		return meta_tag_title( false );
+	}
 
 	/**
 	 * Description meta tag hook
@@ -386,7 +411,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_description() {}
+	public function meta_tag_description() {
+		return meta_tag_description( false );
+	}
 
 	/**
 	 * Author meta tag hook
@@ -395,7 +422,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_author() {}
+	public function meta_tag_author() {
+		return meta_tag_author( false );
+	}
 
 	/**
 	 * Copyright meta tag hook
@@ -404,7 +433,9 @@ class Meta_Data extends Plugin {
 	 * @access public
 	 * @return void
 	 */
-	public function meta_tag_copyright() {}
+	public function meta_tag_copyright() {
+		return meta_tag_copyright( false );
+	}
 
 	/**
 	 * Option return functions
