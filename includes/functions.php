@@ -285,7 +285,10 @@ function is_tag() {
  */
 function is_main_loop() {
 
-	if ( 'blog' == url()->whereAmI() && ! is_cat() && ! is_tag() ) {
+	if (
+		( 'home' == url()->whereAmI() || 'blog' == url()->whereAmI() ) &&
+		! is_cat() && ! is_tag() )
+	{
 		return true;
 	}
 	return false;
@@ -532,6 +535,37 @@ function is_user() {
 }
 
 /**
+ * Get first loop image
+ *
+ * @since  1.0.0
+ * @global function $content;
+ * @return mixed
+ */
+function get_first_loop_image() {
+
+	// Access global variables.
+	global $content;
+
+	if ( ! is_loop_page() ) {
+		return false;
+	}
+
+	$images = [];
+	foreach ( $content as $page ) {
+		if ( $page->coverImage() ) {
+			$images[] = $page->coverImage();
+		}
+	}
+
+	if ( array_key_exists( 0, $images ) ) {
+		if ( ! empty( $images[0] ) ) {
+			return $images[0];
+		}
+	}
+	return false;
+}
+
+/**
  * Get cover image source
  *
  * @since  1.0.0
@@ -549,10 +583,15 @@ function get_cover_src() {
 
 	// If in loop pages.
 	if ( is_main_loop() ) {
-		if ( $default ) {
+		if ( is_static_loop() ) {
+			$loop = static_loop_page();
+			if ( ! empty( $loop->coverImage() ) ) {
+				$src  = $loop->coverImage();
+			}
+		} elseif ( get_first_loop_image() ) {
+			$src = get_first_loop_image();
+		} elseif ( $default ) {
 			$src = $default;
-		} elseif ( page()->coverImage() ) {
-			$src = page()->coverImage();
 		}
 
 	// If on a singular page.
@@ -591,8 +630,8 @@ function has_cover( $default = '' ) {
 	}
 
 	// If on a singular post or page.
-	if ( is_main_loop() /* && ! loop_cover() */ ) {
-		$cover = false;
+	if ( is_main_loop() && get_cover_src() ) {
+		$cover = true;
 	} elseif ( is_user() ) {
 		if ( configureight() ) {
 			if (
