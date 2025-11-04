@@ -112,6 +112,7 @@ class Meta_Data extends Plugin {
 			'meta_hook'        => 'all_meta_tags',
 			'meta_noindex'     => false,
 			'meta_keywords'    => '',
+			'meta_use_std'     => true,
 			'meta_use_schema'  => true,
 			'meta_use_og'      => true,
 			'meta_use_twitter' => true,

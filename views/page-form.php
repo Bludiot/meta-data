@@ -21,6 +21,19 @@ $guide_page = DOMAIN_ADMIN . 'plugin/' . plugin()->className();
 
 ?>
 <style>
+.screen-reader-text {
+	border: 0;
+	clip: rect( 1px, 1px, 1px, 1px );
+	-webkit-clip-path: inset(50%);
+	        clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
 code.select {
 	user-select: all;
 	cursor: pointer;
@@ -32,13 +45,13 @@ code.select {
 <nav id="nav-tabs">
 	<ul class="nav nav-tabs" id="nav-tab" role="tablist">
 		<li class="nav-item">
-			<a id="nav-title-tags-tab" href="#title-tags" class="nav-link active" data-toggle="tab" role="tab" aria-controls="title-tags" aria-selected="false">
-				<?php lang()->p( 'Title Tags' ); ?>
+			<a id="nav-meta-tags-tab" href="#meta-tags" class="nav-link active" data-toggle="tab" role="tab" aria-controls="nav-meta-tags" aria-selected="false">
+				<?php lang()->p( 'Meta Tags' ); ?>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a id="nav-meta-tags-tab" href="#meta-tags" class="nav-link" data-toggle="tab" role="tab" aria-controls="nav-meta-tags" aria-selected="false">
-				<?php lang()->p( 'Meta Tags' ); ?>
+			<a id="nav-title-tags-tab" href="#title-tags" class="nav-link" data-toggle="tab" role="tab" aria-controls="title-tags" aria-selected="false">
+				<?php lang()->p( 'Title Tags' ); ?>
 			</a>
 		</li>
 	</ul>
@@ -46,7 +59,111 @@ code.select {
 
 <div id="tab-content" class="tab-content">
 
-	<div id="title-tags" class="tab-pane fade show active" role="tabpanel" aria-labelledby="title-tags-tab">
+	<div id="meta-tags" class="tab-pane fade show active" role="tabpanel" aria-labelledby="meta-tags-tab">
+
+		<h3 class="form-heading"><?php lang()->p( 'Meta Tag Options' ); ?></h3>
+
+		<p><?php lang()->p( 'Select which types of meta tags are enabled.' ); ?></p>
+
+		<fieldset>
+			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?>	</legend>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_noindex"><?php lang()->p( 'No Index' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_noindex" name="meta_noindex">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_noindex' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_noindex' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+					<small class="form-text"><?php lang()->p( 'Add tag to discourage search engines indexing this site.' ); ?></small>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_use_std"><?php lang()->p( 'Standard Tags' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_use_std" name="meta_use_std">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_std' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_std' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+					<small class="form-text"><?php lang()->p( 'Basic website meta.' ); ?></small>
+				</div>
+			</div>
+
+			<div id="std-wrap" style="display: <?php echo ( plugin()->getValue( 'meta_use_std' ) === true ? 'block' : 'none' ); ?>;">
+				<div class="form-field form-group row">
+					<label class="form-label col-sm-2 col-form-label" for="meta_keywords"><?php lang()->p( 'Keywords' ); ?></label>
+					<div class="col-sm-10">
+						<p><small class="form-text"><?php lang()->p( 'Add one keyword or phrase per line.' ); ?></small></p>
+						<textarea id="meta_keywords" name="meta_keywords" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'meta_keywords' ) ?></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_use_schema"><?php lang()->p( 'Schema Data' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_use_schema" name="meta_use_schema">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+					<small class="form-text"><?php lang()->p( 'Used in conjunction with other Schema data throughout the theme.' ); ?></small>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_use_og"><?php lang()->p( 'Open Graph' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_use_og" name="meta_use_og">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_og' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_og' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+					<small class="form-text"><?php lang()->p( 'Used primarily for embedding URLs; includes Facebook.' ); ?></small>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_use_twitter"><?php lang()->p( 'X/Twitter Cards' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_use_twitter" name="meta_use_twitter">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_twitter' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_twitter' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+					<small class="form-text"><?php lang()->p( 'Used specifically for embedding URLs in X/Twitter.' ); ?></small>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_use_dublin"><?php lang()->p( 'Dublin Core' ); ?></label>
+				<div class="col-sm-10">
+					<select class="form-select" id="meta_use_dublin" name="meta_use_dublin">
+						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
+						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
+					</select>
+				</div>
+			</div>
+
+			<h3 class="form-heading"><?php lang()->p( 'Custom Code' ); ?></h3>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="meta_custom"><?php lang()->p( 'Custom Tags' ); ?></label>
+				<div class="col-sm-10">
+					<p><small class="form-text"><?php lang()->p( 'Prints to the <code>&lt;head&gt;</code> with other meta tags.' ); ?></small></p>
+					<textarea class="code-field" id="meta_custom" name="meta_custom" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'meta_custom' ) ?></textarea>
+				</div>
+			</div>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="footer_scripts"><?php lang()->p( 'Footer Scripts' ); ?></label>
+				<div class="col-sm-10">
+					<p><small class="form-text"><?php lang()->p( 'Useful for analytics code.' ); ?></small></p>
+					<textarea class="code-field" id="footer_scripts" name="footer_scripts" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'footer_scripts' ) ?></textarea>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+	<div id="title-tags" class="tab-pane fade show" role="tabpanel" aria-labelledby="title-tags-tab">
 
 		<h3 class="form-heading"><?php lang()->p( 'Title Tag Options' ); ?></h3>
 
@@ -405,99 +522,6 @@ code.select {
 			<?php endif; ?>
 		</fieldset>
 	</div>
-
-	<div id="meta-tags" class="tab-pane fade show" role="tabpanel" aria-labelledby="meta-tags-tab">
-
-		<h3 class="form-heading"><?php lang()->p( 'Meta Tag Options' ); ?></h3>
-
-		<p><?php lang()->p( 'Standard meta tags are always enabled.' ); ?></p>
-
-		<fieldset>
-			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?></legend>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_noindex"><?php lang()->p( 'No Index' ); ?></label>
-				<div class="col-sm-10">
-					<select class="form-select" id="meta_noindex" name="meta_noindex">
-						<option value="true" <?php echo ( plugin()->getValue( 'meta_noindex' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
-						<option value="false" <?php echo ( plugin()->getValue( 'meta_noindex' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
-					</select>
-					<small class="form-text"><?php lang()->p( 'Add tag to discourage search engines indexing this site.' ); ?></small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_keywords"><?php lang()->p( 'Keywords' ); ?></label>
-				<div class="col-sm-10">
-					<p><small class="form-text"><?php lang()->p( 'Add one keyword or phrase per line.' ); ?></small></p>
-					<textarea id="meta_keywords" name="meta_keywords" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'meta_keywords' ) ?></textarea>
-				</div>
-			</div>
-
-			<h3 class="form-heading"><?php lang()->p( 'Non-Standard Meta Tags' ); ?></h3>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_use_schema"><?php lang()->p( 'Schema Data' ); ?></label>
-				<div class="col-sm-10">
-					<select class="form-select" id="meta_use_schema" name="meta_use_schema">
-						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
-						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
-					</select>
-					<small class="form-text"><?php lang()->p( 'Used in conjunction with other Schema data throughout the theme.' ); ?></small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_use_og"><?php lang()->p( 'Open Graph' ); ?></label>
-				<div class="col-sm-10">
-					<select class="form-select" id="meta_use_og" name="meta_use_og">
-						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_og' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
-						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_og' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
-					</select>
-					<small class="form-text"><?php lang()->p( 'Used primarily for embedding URLs; includes Facebook.' ); ?></small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_use_twitter"><?php lang()->p( 'X/Twitter Cards' ); ?></label>
-				<div class="col-sm-10">
-					<select class="form-select" id="meta_use_twitter" name="meta_use_twitter">
-						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_twitter' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
-						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_twitter' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
-					</select>
-					<small class="form-text"><?php lang()->p( 'Used specifically for embedding URLs in X/Twitter.' ); ?></small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_use_dublin"><?php lang()->p( 'Dublin Core' ); ?></label>
-				<div class="col-sm-10">
-					<select class="form-select" id="meta_use_dublin" name="meta_use_dublin">
-						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
-						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
-					</select>
-				</div>
-			</div>
-
-			<h3 class="form-heading"><?php lang()->p( 'Custom Code' ); ?></h3>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="meta_custom"><?php lang()->p( 'Custom Tags' ); ?></label>
-				<div class="col-sm-10">
-					<p><small class="form-text"><?php lang()->p( 'Prints to the <code>&lt;head&gt;</code> with other meta tags.' ); ?></small></p>
-					<textarea class="code-field" id="meta_custom" name="meta_custom" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'meta_custom' ) ?></textarea>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="footer_scripts"><?php lang()->p( 'Footer Scripts' ); ?></label>
-				<div class="col-sm-10">
-					<p><small class="form-text"><?php lang()->p( 'Useful for analytics code.' ); ?></small></p>
-					<textarea class="code-field" id="footer_scripts" name="footer_scripts" placeholder="" cols="60" rows="4"><?php echo plugin()->getValue( 'footer_scripts' ) ?></textarea>
-				</div>
-			</div>
-		</fieldset>
-	</div>
 </div>
 
 <script>
@@ -514,6 +538,14 @@ $(function() {
 });
 
 jQuery(document).ready( function($) {
+	$( '#meta_use_std' ).on( 'change', function() {
+		var show = $(this).val();
+		if ( show == 'true' ) {
+			$( "#std-wrap" ).fadeIn( 250 );
+		} else if ( show == 'false' ) {
+			$( "#std-wrap" ).fadeOut( 250 );
+		}
+	});
 	$( '#title_sep' ).on( 'change', function() {
 		var show = $(this).val();
 		if ( show == 'custom' ) {
