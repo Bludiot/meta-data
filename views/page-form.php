@@ -153,6 +153,8 @@ code.select {
 
 			<h3 class="form-heading"><?php lang()->p( 'Custom Code' ); ?></h3>
 
+			<p><?php lang()->p( 'The custom code requires the active theme to employ the standard Bludit hooks for head section and body end.' ); ?></p>
+
 			<div class="form-field form-group row">
 				<label class="form-label col-sm-2 col-form-label" for="meta_custom"><?php lang()->p( 'Custom Tags' ); ?></label>
 				<div class="col-sm-10">
