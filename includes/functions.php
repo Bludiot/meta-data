@@ -325,7 +325,7 @@ function is_loop_page() {
  * @since  1.0.0
  * @return boolean Returns true if loop slug is set.
  */
-function is_loop_not_home() {
+function loop_not_home() {
 
 	if ( site()->getField( 'uriBlog' ) ) {
 		return true;
@@ -1353,7 +1353,7 @@ function meta_url() {
 	} elseif ( is_main_loop() && is_static_loop() ) {
 		$url = DOMAIN_BASE . static_loop_page()->slug() . '/';
 
-	} elseif ( is_main_loop() && is_loop_not_home() ) {
+	} elseif ( is_main_loop() && loop_not_home() ) {
 		$url = DOMAIN_BASE . str_replace( '/', '', site()->getField( 'uriBlog' ) ) . '/';
 
 	} elseif ( is_page() ) {
@@ -1397,12 +1397,21 @@ function meta_title() {
 		);
 
 	} elseif ( is_main_loop() ) {
-		$title = sprintf(
-			'%s %s %s',
-			configureight()->loop_title(),
-			$separator,
-			site()->title()
-		);
+		if ( configureight() ) {
+			$title = sprintf(
+				'%s %s %s',
+				configureight()->loop_title(),
+				$separator,
+				site()->title()
+			);
+		} else {
+			$title = sprintf(
+				'%s %s %s',
+				lang()->get( 'Post Index' ),
+				$separator,
+				site()->title()
+			);
+		}
 
 	} elseif ( is_cat() ) {
 		$title = sprintf(
