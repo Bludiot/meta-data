@@ -11,6 +11,7 @@
 // Access namespaced functions.
 use function Meta_Data\{
 	plugin,
+	site,
 	lang,
 	can_search,
 	is_rtl
@@ -377,7 +378,7 @@ code.select {
 			</div>
 			<?php endif; ?>
 
-			<?php if ( ! $site->pageNotFound() ) : ?>
+			<?php if ( ! site()->pageNotFound() ) : ?>
 			<div class="form-field form-group row">
 				<label class="form-label col-sm-2 col-form-label" for="error_ttag"><?php lang()->p( 'LTR 404 Title' ); ?></label>
 				<div class="col-sm-10">
@@ -533,7 +534,7 @@ code.select {
 			</div>
 			<?php endif; ?>
 
-			<?php if ( ! $site->pageNotFound() ) : ?>
+			<?php if ( ! site()->pageNotFound() ) : ?>
 			<div class="form-field form-group row">
 				<label class="form-label col-sm-2 col-form-label" for="error_ttag_rtl"><?php lang()->p( 'RTL 404 Title' ); ?></label>
 				<div class="col-sm-10">
