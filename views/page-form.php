@@ -53,7 +53,7 @@ code.select {
 		</li>
 		<li class="nav-item">
 			<a id="nav-title-tags-tab" href="#title-tags" class="nav-link" data-toggle="tab" role="tab" aria-controls="title-tags" aria-selected="false">
-				<?php lang()->p( 'Title Tags' ); ?>
+				<?php lang()->p( 'Title Tag' ); ?>
 			</a>
 		</li>
 	</ul>
@@ -69,6 +69,16 @@ code.select {
 
 		<fieldset>
 			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?>	</legend>
+
+			<div class="form-field form-group row">
+				<label class="form-label col-sm-2 col-form-label" for="loop_title"><?php lang()->p( 'Blog Title' ); ?></label>
+				<div class="col-sm-10">
+					<div class="field-has-buttons">
+						<input type="text" id="loop_title" name="loop_title" value="<?php echo plugin()->getValue( 'loop_title' ); ?>" placeholder="<?php echo plugin()->loop_title(); ?>" />
+					</div>
+					<small class="form-text"><?php lang()->p( 'Title for blog pages when a static page is not used for the blog index.' ); ?></small>
+				</div>
+			</div>
 
 			<div class="form-field form-group row">
 				<label class="form-label col-sm-2 col-form-label" for="loop_desc"><?php lang()->p( 'Blog Description' ); ?></label>
@@ -119,7 +129,7 @@ code.select {
 						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
 						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_schema' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
 					</select>
-					<small class="form-text"><?php lang()->p( 'Used in conjunction with other Schema data throughout the theme.' ); ?></small>
+					<small class="form-text"><?php lang()->p( 'May help describe the page to robots if Schema tags are not used in the theme.' ); ?></small>
 				</div>
 			</div>
 
@@ -152,6 +162,7 @@ code.select {
 						<option value="true" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === true ? 'selected' : '' ); ?>><?php lang()->p( 'Enabled' ); ?></option>
 						<option value="false" <?php echo ( plugin()->getValue( 'meta_use_dublin' ) === false ? 'selected' : '' ); ?>><?php lang()->p( 'Disabled' ); ?></option>
 					</select>
+					<small class="form-text"><?php lang()->p( 'Rarely used but provided as a legitimate option.' ); ?></small>
 				</div>
 			</div>
 

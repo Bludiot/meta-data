@@ -92,6 +92,7 @@ class Meta_Data extends Plugin {
 		$this->dbFields = [
 			'title_sep'        => '|',
 			'custom_sep'       => '',
+			'loop_title'       => '',
 			'loop_desc'        => '',
 			'default_ttag'     => '',
 			'loop_ttag'        => '',
@@ -489,6 +490,18 @@ class Meta_Data extends Plugin {
 	// @return string
 	public function custom_sep() {
 		return $this->getValue( 'custom_sep' );
+	}
+
+	// @return string
+	public function loop_title() {
+
+		$default = site()->title() . ' ' . lang()->get( 'Blog' );
+		$setting = $this->getValue( 'loop_title' );
+
+		if ( ! empty( $setting ) && ! ctype_space( $setting ) ) {
+			return strip_tags( $this->getValue( 'loop_title' ) );
+		}
+		return $default;
 	}
 
 	// @return string

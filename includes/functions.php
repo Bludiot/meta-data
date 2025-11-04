@@ -489,6 +489,20 @@ function is_front_page() {
 }
 
 /**
+ * Compatible themes
+ *
+ * Hand curated list. No guarantee of completeness.
+ *
+ * @since 1.0.0
+ * @return array
+ */
+function themes_compat() {
+	return [
+		'configureight'
+	];
+}
+
+/**
  * Configure 8 compatibility
  *
  * @since  1.0.0
@@ -1215,10 +1229,18 @@ function meta_title() {
 		);
 
 	} elseif ( is_main_loop() ) {
-		if ( configureight() ) {
+		if ( is_static_loop() ) {
+			$static = static_loop_page();
+			$title  = sprintf(
+				'%s %s %s',
+				$static->title(),
+				$separator,
+				site()->title()
+			);
+		} elseif ( plugin()->loop_title() ) {
 			$title = sprintf(
 				'%s %s %s',
-				configureight()->loop_title(),
+				plugin()->loop_title(),
 				$separator,
 				site()->title()
 			);
