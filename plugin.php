@@ -266,8 +266,10 @@ class Meta_Data extends Plugin {
 	public function siteHead() {
 
 		$meta  = "\r";
-		// $meta .= title_tag();
-		$meta .= meta_tags_standard();
+
+		if ( $this->meta_use_std() ) {
+			$meta .= meta_tags_standard();
+		}
 
 		if ( $this->meta_use_schema() ) {
 			$meta .= meta_tags_schema();
@@ -286,7 +288,24 @@ class Meta_Data extends Plugin {
 		}
 		$meta .= "\r";
 
+		if ( ! empty( $this->meta_custom() ) ) {
+			$meta .= $this->meta_custom();
+			$meta .= "\r";
+		}
 		echo $meta;
+	}
+
+	/**
+	 * Site footer
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return string
+	 */
+	public function siteBodyEnd() {
+		if ( ! empty( $this->footer_scripts() ) ) {
+			echo $this->footer_scripts();
+		}
 	}
 
 	/**
@@ -577,6 +596,11 @@ class Meta_Data extends Plugin {
 	// @return string
 	public function meta_keywords() {
 		return $this->getValue( 'meta_keywords' );
+	}
+
+	// @return boolean
+	public function meta_use_std() {
+		return $this->getValue( 'meta_use_std' );
 	}
 
 	// @return boolean
