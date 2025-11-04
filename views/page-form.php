@@ -61,7 +61,7 @@ code.select {
 
 	<div id="meta-tags" class="tab-pane fade show active" role="tabpanel" aria-labelledby="meta-tags-tab">
 
-		<h3 class="form-heading"><?php lang()->p( 'Meta Tags' ); ?></h3>
+		<h3 class="form-heading mt-3"><?php lang()->p( 'Meta Tags' ); ?></h3>
 
 		<fieldset>
 			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?>	</legend>
@@ -173,7 +173,7 @@ code.select {
 
 	<div id="title-tags" class="tab-pane fade show" role="tabpanel" aria-labelledby="title-tags-tab">
 
-		<h3 class="form-heading"><?php lang()->p( 'Title Tag Options' ); ?></h3>
+		<h3 class="form-heading mt-3"><?php lang()->p( 'Title Tag Options' ); ?></h3>
 
 		<p><?php lang()->p( 'Used by search engines as well as browser tabs.' ); ?></p>
 
