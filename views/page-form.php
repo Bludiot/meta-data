@@ -40,7 +40,9 @@ code.select {
 }
 </style>
 
-<p><?php lang()->p( "Include detailed information about the website for search engines and for embedding URLs. Go to the <a href='{$guide_page}'>Meta Data guide</a> page." ); ?></p>
+<div class="alert alert-primary alert-cats-list" role="alert">
+	<p class="m-0"><?php lang()->p( "Go to the <a href='{$guide_page}'>Meta Data guide</a> page." ); ?></p>
+</div>
 
 <nav id="nav-tabs">
 	<ul class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -62,6 +64,8 @@ code.select {
 	<div id="meta-tags" class="tab-pane fade show active" role="tabpanel" aria-labelledby="meta-tags-tab">
 
 		<h3 class="form-heading mt-3"><?php lang()->p( 'Meta Tags' ); ?></h3>
+
+		<p><?php lang()->p( "Include detailed information about the website for search engines and for embedding URLs." ); ?></p>
 
 		<fieldset>
 			<legend class="screen-reader-text"><?php lang()->p( 'Meta Tags' ); ?>	</legend>
