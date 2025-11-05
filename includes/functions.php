@@ -762,7 +762,6 @@ function page_description( $key = '' ) {
  *
  * @since  1.0.0
  * @global object $categories The Categories class.
- * @global object $L The Language class.
  * @global object $page The Page class.
  * @global object $site The Site class.
  * @global object $tags The Tags class.
@@ -771,7 +770,7 @@ function page_description( $key = '' ) {
  */
 function title_tag() {
 
-	global $categories, $L, $page, $site, $tags, $url;
+	global $categories, $page, $site, $tags, $url;
 
 	// Title separator.
 	$sep = plugin()->dbFields['title_sep'];
@@ -799,14 +798,14 @@ function title_tag() {
 	if ( isset( $_GET['page'] ) && $_GET['page'] > 1 ) {
 		$loop_page = sprintf(
 			' %s %s',
-			$L->get( 'Page' ),
+			lang()->get( 'Page' ),
 			$_GET['page']
 		);
 		if ( is_rtl() ) {
 			$loop_page = sprintf(
 				'%s %s ',
 				$_GET['page'],
-				$L->get( 'Page' )
+				lang()->get( 'Page' )
 			);
 		}
 	}
@@ -839,7 +838,7 @@ function title_tag() {
 		} else {
 			$format = sprintf(
 				'%s %s %s',
-				$L->get( 'URL Error: Page Not Found' ),
+				lang()->get( 'URL Error: Page Not Found' ),
 				$sep,
 				$site->title()
 			);
@@ -848,7 +847,7 @@ function title_tag() {
 					'%s %s %s',
 					$site->title(),
 					$sep,
-					$L->get( 'URL Error: Page Not Found' )
+					lang()->get( 'URL Error: Page Not Found' )
 				);
 			}
 		}
@@ -1034,7 +1033,7 @@ function title_tag() {
 		} else {
 			$format = sprintf(
 				'%s "%s" %s %s',
-				$L->get( 'Searching' ),
+				lang()->get( 'Searching' ),
 				$terms,
 				$sep,
 				$site->title()
@@ -1045,7 +1044,7 @@ function title_tag() {
 					$site->title(),
 					$sep,
 					$terms,
-					$L->get( 'Searching' )
+					lang()->get( 'Searching' )
 				);
 			}
 		}
@@ -1195,6 +1194,23 @@ function meta_title() {
 	// Default to site title.
 	$title = site()->title();
 
+	// Loop page.
+	$loop_page = '';
+	if ( isset( $_GET['page'] ) && $_GET['page'] > 1 ) {
+		$loop_page = sprintf(
+			' %s %s',
+			lang()->get( 'Page' ),
+			$_GET['page']
+		);
+		if ( is_rtl() ) {
+			$loop_page = sprintf(
+				'%s %s ',
+				$_GET['page'],
+				lang()->get( 'Page' )
+			);
+		}
+	}
+
 	if ( is_page() ) {
 		$title = sprintf(
 			'%s %s %s',
@@ -1207,8 +1223,9 @@ function meta_title() {
 		if ( is_static_loop() ) {
 			$static = static_loop_page();
 			$title  = sprintf(
-				'%s %s %s',
+				'%s%s %s %s',
 				$static->title(),
+				$loop_page,
 				$separator,
 				site()->title()
 			);
@@ -1216,8 +1233,9 @@ function meta_title() {
 			$title = plugin()->loop_title();
 		} else {
 			$title = sprintf(
-				'%s %s %s',
+				'%s%s %s %s',
 				lang()->get( 'Post Index' ),
+				$loop_page,
 				$separator,
 				site()->title()
 			);
