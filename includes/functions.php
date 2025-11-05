@@ -775,7 +775,10 @@ function title_tag() {
 
 	// Title separator.
 	$sep = plugin()->dbFields['title_sep'];
-	if ( 'custom' == plugin()->title_sep() && plugin()->custom_sep() ) {
+	if (
+		'custom' == plugin()->title_sep() &&
+		! ctype_space( plugin()->custom_sep() )
+	) {
 		$sep = plugin()->custom_sep();
 	} elseif ( 'custom' != plugin()->title_sep() ) {
 		$sep = plugin()->title_sep();
@@ -793,23 +796,17 @@ function title_tag() {
 
 	// Loop page.
 	$loop_page = '';
-	$loop_sep  = '>';
-	if ( is_rtl() ) {
-		$loop_sep  = '<';
-	}
 	if ( isset( $_GET['page'] ) && $_GET['page'] > 1 ) {
 		$loop_page = sprintf(
-			' %s %s %s',
-			$loop_sep,
+			' %s %s',
 			$L->get( 'Page' ),
 			$_GET['page']
 		);
 		if ( is_rtl() ) {
 			$loop_page = sprintf(
-				'%s %s %s ',
+				'%s %s ',
 				$_GET['page'],
-				$L->get( 'Page' ),
-				$loop_sep
+				$L->get( 'Page' )
 			);
 		}
 	}

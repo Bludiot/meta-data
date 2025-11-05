@@ -217,9 +217,9 @@ code.select {
 
 							<option value="—" <?php echo ( plugin()->getValue( 'title_sep' ) === '—' ? 'selected' : '' ); ?>><?php lang()->p( 'Dash' ); ?> ( — )</option>
 
-							<option value="&gt;" <?php echo ( plugin()->getValue( 'title_sep' ) === '&gt;' ? 'selected' : '' ); ?>><?php lang()->p( 'Angle' ); ?> ( &gt; )</option>
+							<option value="&gt;" <?php echo ( plugin()->getValue( 'title_sep' ) === '&gt;' ? 'selected' : '' ); ?>><?php lang()->p( 'Angle' ); ?> ( <?php echo ( is_rtl() ? '&lt;' : '&gt;' ); ?> )</option>
 
-							<option value="≫" <?php echo ( plugin()->getValue( 'title_sep' ) === '≫' ? 'selected' : '' ); ?>><?php lang()->p( 'Double' ); ?> ( &#8811; )</option>
+							<option value="≫" <?php echo ( plugin()->getValue( 'title_sep' ) === '≫' ? 'selected' : '' ); ?>><?php lang()->p( 'Double' ); ?> ( <?php echo ( is_rtl() ? '≪' : '≫' ); ?> )</option>
 
 							<option value="→" <?php echo ( plugin()->getValue( 'title_sep' ) === '→' ? 'selected' : '' ); ?>><?php lang()->p( 'Arrow' ); ?> ( <?php echo ( is_rtl() ? '←' : '→' ); ?> )</option>
 
