@@ -39,6 +39,11 @@ code.select {
 	user-select: all;
 	cursor: pointer;
 }
+.field-has-buttons {
+	display: flex;
+	gap: 0 0.25rem;
+	flex-wrap: nowrap;
+}
 </style>
 
 <div class="alert alert-primary alert-cats-list" role="alert">
