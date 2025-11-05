@@ -127,7 +127,6 @@ class Meta_Data extends Plugin {
 			'meta_tag_title',
 			'meta_tag_language',
 			'meta_tag_keywords',
-			'meta_tag_title',
 			'meta_tag_description',
 			'meta_tag_author',
 			'meta_tag_copyright'
