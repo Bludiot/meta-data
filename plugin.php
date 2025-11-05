@@ -102,14 +102,6 @@ class Meta_Data extends Plugin {
 			'tag_ttag'         => '',
 			'search_ttag'      => '',
 			'error_ttag'       => '',
-			'default_ttag_rtl' => '',
-			'loop_ttag_rtl'    => '',
-			'post_ttag_rtl'    => '',
-			'page_ttag_rtl'    => '',
-			'cat_ttag_rtl'     => '',
-			'tag_ttag_rtl'     => '',
-			'search_ttag_rtl'  => '',
-			'error_ttag_rtl'   => '',
 			'use_title_tag'    => true,
 			'meta_hook'        => 'all_meta_tags',
 			'meta_noindex'     => false,
@@ -585,46 +577,6 @@ class Meta_Data extends Plugin {
 	// @return string
 	public function error_ttag() {
 		return $this->getValue( 'error_ttag' );
-	}
-
-	// @return string
-	public function default_ttag_rtl() {
-		return $this->getValue( 'default_ttag_rtl' );
-	}
-
-	// @return string
-	public function loop_ttag_rtl() {
-		return $this->getValue( 'loop_ttag_rtl' );
-	}
-
-	// @return string
-	public function post_ttag_rtl() {
-		return $this->getValue( 'post_ttag_rtl' );
-	}
-
-	// @return string
-	public function page_ttag_rtl() {
-		return $this->getValue( 'page_ttag_rtl' );
-	}
-
-	// @return string
-	public function cat_ttag_rtl() {
-		return $this->getValue( 'cat_ttag_rtl' );
-	}
-
-	// @return string
-	public function tag_ttag_rtl() {
-		return $this->getValue( 'tag_ttag_rtl' );
-	}
-
-	// @return string
-	public function search_ttag_rtl() {
-		return $this->getValue( 'search_ttag_rtl' );
-	}
-
-	// @return string
-	public function error_ttag_rtl() {
-		return $this->getValue( 'error_ttag_rtl' );
 	}
 
 	// @return string

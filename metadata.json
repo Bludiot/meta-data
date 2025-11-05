@@ -7,6 +7,6 @@
 	"license"      : "",
 	"compatible"   : "3.16.2",
 	"theme_compat" : [ "configureight" ],
-	"theme_desc"   : "The Meta Data plugin adds meta tags for SEO and site sharing. Includes customizable tags for LTR and RTL languages.",
+	"theme_desc"   : "The Meta Data plugin adds meta tags for SEO and site sharing. Includes customizable tags.",
 	"notes"        : ""
 }

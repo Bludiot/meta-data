@@ -815,9 +815,7 @@ function title_tag() {
 	}
 
 	// Default title.
-	if ( is_rtl() && plugin()->default_ttag_rtl() ) {
-		$format = plugin()->default_ttag_rtl();
-	} elseif ( plugin()->default_ttag() ) {
+	if ( plugin()->default_ttag() ) {
 		$format = plugin()->default_ttag();
 	} else {
 		$format = sprintf(
@@ -839,9 +837,7 @@ function title_tag() {
 	// Default 404 page.
 	if ( $url->notFound() && ! $site->pageNotFound() ) {
 
-		if ( is_rtl() && plugin()->error_ttag_rtl() ) {
-			$format = plugin()->error_ttag_rtl();
-		} elseif ( plugin()->error_ttag() ) {
+		if ( plugin()->error_ttag() ) {
 			$format = plugin()->error_ttag();
 		} else {
 			$format = sprintf(
@@ -863,9 +859,7 @@ function title_tag() {
 	// Posts loop.
 	} elseif ( 'home' == $url->whereAmI() || 'blog' == $url->whereAmI() ) {
 
-		if ( is_rtl() && plugin()->loop_ttag_rtl() ) {
-			$format = plugin()->loop_ttag_rtl();
-		} elseif ( plugin()->loop_ttag() ) {
+		if ( plugin()->loop_ttag() ) {
 			$format = plugin()->loop_ttag();
 
 		} elseif ( is_static_loop() ) {
@@ -927,9 +921,7 @@ function title_tag() {
 
 		// Page (static).
 		if ( $page->isStatic() ) {
-			if ( is_rtl() && plugin()->page_ttag_rtl() ) {
-				$format = plugin()->page_ttag_rtl();
-			} elseif ( plugin()->page_ttag() ) {
+			if ( plugin()->page_ttag() ) {
 					$format = plugin()->page_ttag();
 			} else {
 				$format = sprintf(
@@ -948,9 +940,7 @@ function title_tag() {
 				}
 			}
 		} else {
-			if ( is_rtl() && plugin()->post_ttag_rtl() ) {
-				$format = plugin()->post_ttag_rtl();
-			} elseif ( plugin()->post_ttag() ) {
+			if ( plugin()->post_ttag() ) {
 					$format = plugin()->post_ttag();
 			} else {
 				$format = sprintf(
@@ -983,9 +973,7 @@ function title_tag() {
 			$key    = $url->slug();
 			$cat    = new \Category( $key );
 
-			if ( is_rtl() && plugin()->cat_ttag_rtl() ) {
-				$format = plugin()->cat_ttag_rtl();
-			} elseif ( plugin()->cat_ttag() ) {
+			if ( plugin()->cat_ttag() ) {
 					$format = plugin()->cat_ttag();
 			} else {
 				$format = sprintf(
@@ -1014,9 +1002,7 @@ function title_tag() {
 			$key    = $url->slug();
 			$tag    = new \Tag( $key );
 
-			if ( is_rtl() && plugin()->tag_ttag_rtl() ) {
-				$format = plugin()->tag_ttag_rtl();
-			} elseif ( plugin()->tag_ttag() ) {
+			if ( plugin()->tag_ttag() ) {
 					$format = plugin()->tag_ttag();
 			} else {
 				$format = sprintf(
@@ -1048,9 +1034,7 @@ function title_tag() {
 			$terms = str_replace( '+', ' ', $terms );
 		}
 
-		if ( is_rtl() && plugin()->search_ttag_rtl() ) {
-			$format = plugin()->search_ttag_rtl();
-		} elseif ( plugin()->search_ttag() ) {
+		if ( plugin()->search_ttag() ) {
 				$format = plugin()->search_ttag();
 		} else {
 			$format = sprintf(

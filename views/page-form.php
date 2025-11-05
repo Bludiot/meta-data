@@ -241,12 +241,10 @@ code.select {
 				</div>
 			</div>
 
-			<h3 class="form-heading"><?php lang()->p( 'Left-to-Right Titles' ); ?></h3>
-
 			<p><?php lang()->p( 'Title formats for left-to-right languages.' ); ?></p>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="default_ttag"><?php lang()->p( 'LTR Default Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="default_ttag"><?php lang()->p( 'Default Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="default_ttag" name="default_ttag" value="<?php echo plugin()->getValue( 'default_ttag' ); ?>" placeholder="{{site-title}} {{separator}} {{site-slogan}}" />
@@ -263,7 +261,7 @@ code.select {
 			</div>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="loop_ttag"><?php lang()->p( 'LTR Loop Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="loop_ttag"><?php lang()->p( 'Loop Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="loop_ttag" name="loop_ttag" value="<?php echo plugin()->getValue( 'loop_ttag' ); ?>" placeholder="<?php echo lang()->get( 'Blog' ); ?> {{page-number}} {{separator}} {{site-title}}" />
@@ -281,7 +279,7 @@ code.select {
 			</div>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="post_ttag"><?php lang()->p( 'LTR Post Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="post_ttag"><?php lang()->p( 'Post Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="post_ttag" name="post_ttag" value="<?php echo plugin()->getValue( 'post_ttag' ); ?>" placeholder="{{page-title}} {{separator}} {{published}} {{separator}} {{site-title}}" />
@@ -301,7 +299,7 @@ code.select {
 			</div>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="page_ttag"><?php lang()->p( 'LTR Page Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="page_ttag"><?php lang()->p( 'Page Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="page_ttag" name="page_ttag" value="<?php echo plugin()->getValue( 'page_ttag' ); ?>" placeholder="{{page-title}} {{separator}} {{site-title}}" />
@@ -320,7 +318,7 @@ code.select {
 			</div>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="cat_ttag"><?php lang()->p( 'LTR Category Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="cat_ttag"><?php lang()->p( 'Category Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="cat_ttag" name="cat_ttag" value="<?php echo plugin()->getValue( 'cat_ttag' ); ?>" placeholder="{{category-name}} {{separator}} {{site-title}}" />
@@ -339,7 +337,7 @@ code.select {
 			</div>
 
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="tag_ttag"><?php lang()->p( 'LTR Tag Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="tag_ttag"><?php lang()->p( 'Tag Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="tag_ttag" name="tag_ttag" value="<?php echo plugin()->getValue( 'tag_ttag' ); ?>" placeholder="{{tag-name}} {{separator}} {{site-title}}" />
@@ -359,7 +357,7 @@ code.select {
 
 			<?php if ( can_search() ) : ?>
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="search_ttag"><?php lang()->p( 'LTR Search Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="search_ttag"><?php lang()->p( 'Search Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="search_ttag" name="search_ttag" value="<?php echo plugin()->getValue( 'search_ttag' ); ?>" placeholder="<?php lang()->p( 'Searching' ); ?> {{search-terms}} {{separator}} {{site-title}}" />
@@ -380,167 +378,11 @@ code.select {
 
 			<?php if ( ! site()->pageNotFound() ) : ?>
 			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="error_ttag"><?php lang()->p( 'LTR 404 Title' ); ?></label>
+				<label class="form-label col-sm-2 col-form-label" for="error_ttag"><?php lang()->p( '404 Title' ); ?></label>
 				<div class="col-sm-10">
 					<div class="field-has-buttons">
 						<input type="text" id="error_ttag" name="error_ttag" value="<?php echo plugin()->getValue( 'error_ttag' ); ?>" placeholder="<?php lang()->p( 'URL Not Found' ); ?> {{separator}} {{site-title}}" />
 						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#error_ttag').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-					</small>
-				</div>
-			</div>
-			<?php endif; ?>
-
-			<h3 class="form-heading"><?php lang()->p( 'Right-to-Left Titles' ); ?></h3>
-
-			<p><?php lang()->p( 'Title formats for right-to-left languages.' ); ?></p>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="default_ttag_rtl"><?php lang()->p( 'RTL Default Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="default_ttag_rtl" name="default_ttag_rtl" value="<?php echo plugin()->getValue( 'default_ttag_rtl' ); ?>" placeholder="{{site-slogan}} {{separator}} {{site-title}}" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#default_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-					</small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="loop_ttag_rtl"><?php lang()->p( 'RTL Loop Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="loop_ttag_rtl" name="loop_ttag_rtl" value="<?php echo plugin()->getValue( 'loop_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{page-number}} <?php echo lang()->get( 'Blog' ); ?>" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#loop_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{page-number}}</code>
-					</small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="post_ttag_rtl"><?php lang()->p( 'RTL Post Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="post_ttag_rtl" name="post_ttag_rtl" value="<?php echo plugin()->getValue( 'post_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{published}} {{separator}} {{page-title}}" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#post_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{page-title}}</code>
-						<code class="select">{{page-description}}</code>
-						<code class="select">{{published}}</code>
-					</small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="page_ttag_rtl"><?php lang()->p( 'RTL Page Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="page_ttag_rtl" name="page_ttag_rtl" value="<?php echo plugin()->getValue( 'page_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{page-title}}" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#page_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{page-title}}</code>
-						<code class="select">{{page-description}}</code>
-					</small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="cat_ttag_rtl"><?php lang()->p( 'RTL Category Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="cat_ttag_rtl" name="cat_ttag_rtl" value="<?php echo plugin()->getValue( 'cat_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{category-name}}" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#cat_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{category-name}}</code>
-						<code class="select">{{page-number}}</code>
-					</small>
-				</div>
-			</div>
-
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="tag_ttag_rtl"><?php lang()->p( 'RTL Tag Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="tag_ttag_rtl" name="tag_ttag_rtl" value="<?php echo plugin()->getValue( 'tag_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{tag-name}}" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#tag_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{tag-name}}</code>
-						<code class="select">{{page-number}}</code>
-					</small>
-				</div>
-			</div>
-
-			<?php if ( can_search() ) : ?>
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="search_ttag_rtl"><?php lang()->p( 'RTL Search Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="search_ttag_rtl" name="search_ttag_rtl" value="<?php echo plugin()->getValue( 'search_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} {{search-terms}} <?php lang()->p( 'Searching' ); ?>" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#search_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
-					</div>
-					<small class="form-text">
-						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
-						<code class="select">{{separator}}</code>
-						<code class="select">{{site-title}}</code>
-						<code class="select">{{site-slogan}}</code>
-						<code class="select">{{site-description}}</code>
-						<code class="select">{{search-terms}}</code>
-						<code class="select">{{page-number}}</code>
-					</small>
-				</div>
-			</div>
-			<?php endif; ?>
-
-			<?php if ( ! site()->pageNotFound() ) : ?>
-			<div class="form-field form-group row">
-				<label class="form-label col-sm-2 col-form-label" for="error_ttag_rtl"><?php lang()->p( 'RTL 404 Title' ); ?></label>
-				<div class="col-sm-10">
-					<div class="field-has-buttons">
-						<input type="text" id="error_ttag_rtl" name="error_ttag_rtl" value="<?php echo plugin()->getValue( 'error_ttag_rtl' ); ?>" placeholder="{{site-title}} {{separator}} <?php lang()->p( 'URL Not Found' ); ?>" />
-						<span class="btn btn-secondary btn-md form-range-button hide-if-no-js" onClick="$('#error_ttag_rtl').val('');"><?php lang()->p( 'Clear' ); ?></span>
 					</div>
 					<small class="form-text">
 						<span class=""><?php lang()->p( 'Placeholders:' ); ?> </span>
