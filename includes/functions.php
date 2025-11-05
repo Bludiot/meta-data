@@ -879,18 +879,16 @@ function title_tag() {
 			}
 		} else {
 			$format = sprintf(
-				'%s%s %s %s',
+				'%s %s %s',
 				$loop_name,
-				$loop_page,
 				$sep,
 				$site->title()
 			);
 			if ( is_rtl() ) {
 				$format = sprintf(
-					'%s %s %s%s',
+					'%s %s %s',
 					$site->title(),
 					$sep,
-					$loop_page,
 					$loop_name
 				);
 			}
