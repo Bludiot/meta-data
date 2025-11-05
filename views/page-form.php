@@ -206,7 +206,7 @@ code.select {
 
 		<h3 class="form-heading mt-3"><?php lang()->p( 'Title Tag Options' ); ?></h3>
 
-		<p><?php lang()->p( 'The Meta Data plugin offers a much better, more accurate title tag (used by search engines as well as browser tabs) than the default Bludit title tag. However it requires the active theme to employ the <code>meta_tags_title</code> hook in its head section. See the plugin guide for more information.' ); ?></p>
+		<p><?php lang()->p( 'The Meta Data plugin offers a much better, more accurate title tag (used by search engines as well as browser tabs) than the default Bludit title tag. However it requires the active theme to employ the <code>title_tag</code> hook in its head section. See the plugin guide for more information.' ); ?></p>
 
 		<fieldset>
 

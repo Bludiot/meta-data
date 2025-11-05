@@ -53,11 +53,12 @@ pre {
 		<p><?php lang()->p( 'When a static page is chosen in the Bludit settings to display blog pages, the metadata has a a page title, and perhaps a description, to use for the title & description meta tags. But when blog posts are displayed on the site home there is no page to use for this.' ); ?></p>
 
 		<p><?php lang()->p( 'There is some basic text hard-coded into the Meta Data plugin for this case but you can override this with your own custom text. There are also placeholders available that pull text from other settings.' ); ?></p>
+		<h3 class="form-heading"><?php lang()->p( 'Custom Theme Hooks' ); ?></h3>
 	</div>
 
 	<div id="title" class="tab-pane fade show mt-4" role="tabpanel" aria-labelledby="tab-two">
 		<h2 class="form-heading mt-3"><?php lang()->p( 'A Better Title Tag' ); ?></h2>
-		<p><?php lang()->p( 'The Meta Data plugin offers a much better, more accurate title tag (used by search engines as well as browser tabs) than the default Bludit title tag. However it requires the active theme to employ the <code>meta_tags_title</code> hook in its head section.' ); ?></p>
+		<p><?php lang()->p( 'The Meta Data plugin offers a much better, more accurate title tag (used by search engines as well as browser tabs) than the default Bludit title tag. However it requires the active theme to employ the <code>title_tag</code> hook in its head section.' ); ?></p>
 
 		<?php if ( in_array( site()->theme(), themes_compat() ) ) : ?>
 		<p><?php lang()->p( '<strong>The active theme is compatible with this plugin.</strong> There is no need to add the title tag code.' ); ?></p>
@@ -68,8 +69,8 @@ pre {
 		<p><?php lang()->p( 'For Bludit Versions Before 4.0' ); ?></p>
 		<pre lang="php">
 &lt;?php
-if ( getPlugin( 'Meta_Data' ) ) {
-	Theme::plugins( 'meta_tags_title' );
+if ( getPlugin( 'Meta_Data' ) && $plugins['title_tag'] ) {
+	Theme::plugins( 'title_tag' );
 } else {
 	echo Theme::metaTagTitle();
 } ?&gt;
@@ -78,8 +79,8 @@ if ( getPlugin( 'Meta_Data' ) ) {
 		<p><?php lang()->p( 'For Bludit Version 4.0+' ); ?></p>
 		<pre lang="php">
 &lt;?php
-if ( getPlugin( 'Meta_Data' ) ) {
-	execPluginsByHook( 'meta_tags_title' );
+if ( getPlugin( 'Meta_Data' ) && $plugins['title_tag'] ) {
+	execPluginsByHook( 'title_tag' );
 } else {
 	echo HTML::metaTagTitle();
 } ?&gt;
