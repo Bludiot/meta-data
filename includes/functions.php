@@ -782,15 +782,11 @@ function title_tag() {
 	}
 
 	// Loop name.
-	$loop_name = '';
-	if ( 'blog' == $url->whereAmI() ) {
+	$loop_name = plugin()->loop_title();
+	if (  'home' == $url->whereAmI() || 'blog' == $url->whereAmI() ) {
 		if ( ! is_static_loop() ) {
-			if ( configureight()->loop_title() ) {
-				$loop_name = ucwords( configureight()->loop_title() );
-			} elseif ( $site->uriBlog() ) {
-				$loop_name = ucwords( str_replace( [ '/', '-', '_' ], '', $site->uriBlog() ) );
-			} else {
-				$loop_name = ucwords( configureight()->loop_type() );
+			if ( site()->getField( 'uriBlog' ) ) {
+				$loop_name = ucwords( str_replace( [ '/', '-', '_' ], '', site()->getField( 'uriBlog' ) ) );
 			}
 		}
 	}
@@ -865,7 +861,7 @@ function title_tag() {
 		}
 
 	// Posts loop.
-	} elseif ( 'blog' == $url->whereAmI() ) {
+	} elseif ( 'home' == $url->whereAmI() || 'blog' == $url->whereAmI() ) {
 
 		if ( is_rtl() && plugin()->loop_ttag_rtl() ) {
 			$format = plugin()->loop_ttag_rtl();

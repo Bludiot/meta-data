@@ -500,11 +500,23 @@ class Meta_Data extends Plugin {
 				lang()->get( 'Page' ),
 				$_GET['page']
 			);
+			$default = sprintf(
+				'%s %s %s',
+				site()->title(),
+				lang()->get( 'Blog' ),
+				$loop_page
+			);
 			if ( is_rtl() ) {
 				$loop_page = sprintf(
-					'%s %s %s',
+					'%s %s',
 					$_GET['page'],
 					lang()->get( 'Page' )
+				);
+				$default = sprintf(
+					'%s %s %s',
+					$loop_page,
+					lang()->get( 'Blog' ),
+					site()->title()
 				);
 			}
 		}
