@@ -589,11 +589,6 @@ function get_cover_src() {
 
 	$src     = '';
 	$default = '';
-	if ( configureight() ) {
-		if ( configureight()->cover_src() ) {
-			$default = configureight()->cover_src();
-		}
-	}
 
 	// If in loop pages.
 	if ( is_main_loop() ) {
@@ -634,76 +629,22 @@ function has_cover( $default = '' ) {
 	// Start false, conditionally true.
 	$cover = false;
 
-	// Default cover from theme plugin.
-	if ( configureight() ) {
-		if ( configureight()->cover_src() ) {
-			$default = configureight()->cover_src();
-		}
-	} else {
-		$default = get_cover_src();
-	}
+	// Default cover image.
+	$default = get_cover_src();
 
 	// If on a singular post or page.
 	if ( is_main_loop() && get_cover_src() ) {
 		$cover = true;
 	} elseif ( is_user() ) {
-		if ( configureight() ) {
-			if (
-				'header' == configureight()->cover_in_profile() ||
-				'both'   == configureight()->cover_in_profile()
-			) {
-				$cover = true;
-			} else {
-				$cover = false;
-			}
-		} else {
-			$cover = true;
-		}
+		$cover = true;
 	} elseif ( is_page() ) {
 
 		// If the page has a cover image set.
-		if ( ! configureight() && page()->coverImage() ) {
+		if ( page()->coverImage() ) {
 			$cover = true;
 		}
 
-		// False if `no-cover` template.
-		if ( str_contains( page()->template(), 'no-cover' ) ) {
-			$cover = false;
-		}
-
-		if ( configureight() ) {
-			if ( 'page' == page_type() ) {
-				if ( 'none' == configureight()->cover_in_page() ) {
-					if ( str_contains( page()->template(), 'full-cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} elseif ( str_contains( page()->template(), 'default-cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} elseif ( page()->custom( 'random_cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} else {
-						$cover = false;
-					}
-				} elseif ( configureight()->cover_src() ) {
-					$cover = true;
-				}
-			} else {
-				if ( 'none' == configureight()->cover_in_post() ) {
-					if ( str_contains( page()->template(), 'full-cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} elseif ( str_contains( page()->template(), 'default-cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} elseif ( page()->custom( 'random_cover' ) && configureight()->cover_src() ) {
-						$cover = true;
-					} else {
-						$cover = false;
-					}
-				} elseif ( configureight()->cover_src() ) {
-					$cover = true;
-				}
-			}
-
-		// If the theme plugin has a default cover image set.
-		} elseif ( ! empty( $default ) ) {
+		if ( ! empty( $default ) ) {
 
 			if ( filter_var( $default, FILTER_VALIDATE_URL ) ) {
 				$cover = true;
