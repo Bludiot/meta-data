@@ -2,6 +2,6 @@
 	"plugin-data":
 	{
 		"name": "Meta Data",
-		"description": "A meta data plugin for Bludit CMS."
+		"description": "The Meta Data plugin adds meta tags for SEO and site sharing."
 	}
 }
