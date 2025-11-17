@@ -21,7 +21,8 @@ $form_page = DOMAIN_ADMIN . 'configure-plugin/' . plugin()->className();
 
 ?>
 <style>
-pre {
+pre,
+code.select {
 	user-select: all;
 	cursor: pointer;
 }
@@ -54,6 +55,42 @@ pre {
 
 		<p><?php lang()->p( 'There is some basic text hard-coded into the Meta Data plugin for this case but you can override this with your own custom text. There are also placeholders available that pull text from other settings.' ); ?></p>
 		<h3 class="form-heading"><?php lang()->p( 'Custom Theme Hooks' ); ?></h3>
+
+		<p><?php lang()->p( 'If you prefer not to use the <code>siteHead</code> hook to add meta tags then you can use the many custom hooks provided by the Meta Data plugin.' ); ?></p>
+
+		<p><?php lang()->p( 'All of the meta tag hooks will print the tags regardless of whether they are enabled in the settings.' ); ?></p>
+
+		<h4 class="form-heading mt-3"><?php lang()->p( 'All Tags' ); ?></h4>
+
+		<p><?php lang()->p( 'This prints the standard tags, Schema, Open Graph, Twitter/X, and Dublin Core.' ); ?></p>
+
+		<p><?php lang()->p( 'For Bludit Versions Before 4.0' ); ?></p>
+		<pre lang="php">
+&lt;?php
+if ( getPlugin( 'Meta_Data' ) && $plugins['all_meta_tags'] ) {
+	Theme::plugins( 'all_meta_tags' );
+} ?&gt;
+		</pre>
+
+		<p><?php lang()->p( 'For Bludit Version 4.0+' ); ?></p>
+		<pre lang="php">
+&lt;?php
+if ( getPlugin( 'Meta_Data' ) && $plugins['all_meta_tags'] ) {
+	execPluginsByHook( 'all_meta_tags' );
+} ?&gt;
+		</pre>
+
+		<h4 class="form-heading mt-3"><?php lang()->p( 'Specific Tags' ); ?></h4>
+
+		<p><?php lang()->p( 'Use the same conditional logic above to print the following hooks.' ); ?></p>
+
+		<ul>
+			<li><code class="select">standard_tags</code></li>
+			<li><code class="select">schema_tags</code></li>
+			<li><code class="select">open_graph_tags</code></li>
+			<li><code class="select">twitter_tags</code></li>
+			<li><code class="select">dublin_core_tags</code></li>
+		</ul>
 	</div>
 
 	<div id="title" class="tab-pane fade show mt-4" role="tabpanel" aria-labelledby="tab-two">
