@@ -5,7 +5,7 @@
 	"version"      : "1.0.0",
 	"releaseDate"  : "",
 	"license"      : "",
-	"compatible"   : "3.16.2",
+	"compatible"   : "3.22.0",
 	"theme_compat" : [ "configureight" ],
 	"theme_desc"   : "The Meta Data plugin adds meta tags for SEO and site sharing.",
 	"notes"        : ""
